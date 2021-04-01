@@ -1,3 +1,5 @@
+package BuisnessCodeAssignment;
+
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 
 
@@ -77,6 +79,8 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static void generateCustomerDataFile(){
+    System.out.println("Commit change");
+    // Staging my first commit
     }
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
