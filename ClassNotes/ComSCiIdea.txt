@@ -1,0 +1,9 @@
+Program: Set of instructions
+        Print 
+        Print
+        Print
+
+
+Question:       Many Conitions          Outcomes            
+To get out of bed or not      ->        Get out of bed
+                              ->        Stay in bed
