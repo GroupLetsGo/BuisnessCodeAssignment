@@ -72,15 +72,14 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static void validateCreditCard(){
+
     }
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void generateCustomerDataFile(){
-    System.out.println("Commit change");
-    // Staging my first commit
+    public static void generateCustomerDataFile(int x){
     }
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
