@@ -104,14 +104,14 @@ class CustomerSystem{
                 else{
                     int evenDigit = 2*i;
 
+                    // If the code is a double digit or above, the two digits are added together into a one digit number
                     while(evenDigit > 0){
                         sumEvenDouble = sumEvenDouble + evenDigit%10;
                         evenDigit = evenDigit / 10;
-                        System.out.println(sumEvenDouble);
                     }
                 }
-                
             }
+            // The final check for credit card, if the sum of all odd num and sum of all the doubled even num is divisble by 10, it is real, if not, then it is fake
             int sumOddEven = sumOdd + sumEvenDouble;
 
             if (sumOddEven % 10 == 0){
@@ -123,7 +123,7 @@ class CustomerSystem{
                 System.out.println("This credit card is not a real one");
             }
         }
-        // If the credit card number is less than 9, then this card is fake
+        // If the credit card number is less than 9, then this card is fake to the program
         else{
             System.out.println("The card is fake");
         }
