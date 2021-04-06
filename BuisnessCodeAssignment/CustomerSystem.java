@@ -71,14 +71,73 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validateCreditCard(){
+    public static void validateCreditCard(String creditCardNumber){
+
+        // Setting up the int I will use later
+        int sumOdd = 0;
+        int sumEvenDouble = 0;
+
+        boolean creditCardOrNot;
+
+
+        // Check for the lengh of credit card
+        int len = creditCardNumber.length();
+
+        // If the credit card number is greater than or equal to 9, it might be real
+        // goes onto the next varification steps
+        if (len >= 9){
+            // Convert the string creditCardNumber to an actual number stored in int
+            int mathCreditCardNumber = Integer.parseInt(creditCardNumber);
+
+            // Reverse the credit card number
+            for (int i = len; i >0; i--){
+
+                // If the reversed credit card num is an odd number
+                // The code will take all of the odd numbers and add them together
+                if (i%2 != 0){
+                    int oddDigit = i;
+                    sumOdd = sumOdd + oddDigit;
+                }
+
+                // If the reversed credit card num is an even number 
+                // The code will double all of the even numbers
+                else{
+                    int evenDigit = i;
+                    int doubleI = 2*evenDigit;
+
+                    while(doubleI > 0){
+                        sumEvenDouble = sumEvenDouble + doubleI%10;
+                        doubleI = doubleI / 10;
+                        System.out.println(sumEvenDouble);
+                    }
+                }
+                int sumOddEven = sumOdd + sumEvenDouble;
+
+                if (sumOddEven % 10 == 0){
+                    creditCardOrNot = true;
+                }
+                else{
+                    creditCardOrNot = false;
+                }
+            }
+            if (creditCardOrNot = true){
+                System.out.println("The credit card is a validated real credit card");
+            }
+            else{
+                System.out.println("This credit card is not a real one");
+            }
+        }
+        // If the credit card number is less than 9, then this card is fake
+        else{
+            System.out.println("The card is fake");
+        }
     }
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void generateCustomerDataFile(int x){
+    public static void generateCustomerDataFile(int x){ 
     }
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
