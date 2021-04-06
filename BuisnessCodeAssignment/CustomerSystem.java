@@ -72,7 +72,6 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static void validateCreditCard(){
-
     }
     /*
     * This method may be edited to achieve the task however you like.
