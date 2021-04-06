@@ -102,28 +102,24 @@ class CustomerSystem{
                 // If the reversed credit card num is an even number 
                 // The code will double all of the even numbers
                 else{
-                    int evenDigit = i;
-                    int doubleI = 2*evenDigit;
+                    int evenDigit = 2*i;
 
-                    while(doubleI > 0){
-                        sumEvenDouble = sumEvenDouble + doubleI%10;
-                        doubleI = doubleI / 10;
+                    while(evenDigit > 0){
+                        sumEvenDouble = sumEvenDouble + evenDigit%10;
+                        evenDigit = evenDigit / 10;
                         System.out.println(sumEvenDouble);
                     }
                 }
-                int sumOddEven = sumOdd + sumEvenDouble;
-
-                if (sumOddEven % 10 == 0){
-                    creditCardOrNot = true;
-                }
-                else{
-                    creditCardOrNot = false;
-                }
+                
             }
-            if (creditCardOrNot = true){
+            int sumOddEven = sumOdd + sumEvenDouble;
+
+            if (sumOddEven % 10 == 0){
+                creditCardOrNot = true;
                 System.out.println("The credit card is a validated real credit card");
             }
             else{
+                creditCardOrNot = false;
                 System.out.println("This credit card is not a real one");
             }
         }
