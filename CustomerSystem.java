@@ -1,6 +1,9 @@
 package BuisnessCodeAssignment;
 
+
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 
@@ -135,8 +138,65 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void generateCustomerDataFile(String username) throws FileNotFoundException{ 
+    public static void unqiuePassword(String username) throws FileNotFoundException{ 
+        File file = new File("../../ID.txt");
+
+        String fileName = "ID.txt"; // 
+
+        File textFile = new File(fileName);
+        Scanner reader = new Scanner(textFile);
+
+        int nextInt = reader.nextInt();
+        int num = nextInt;
+
+        reader.close();
+
+        if (fileName.length() == 0){                                    // Cannot get the file to start with a zero
+            PrintWriter out = new PrintWriter(fileName);
+            int zero = 0;
+            out.println(zero);
+            out.close();
+        }
+
+        int i = 1;
+
+        if(num == 0){
+            PrintWriter out = new PrintWriter(fileName);
+            out.println(i);
+            System.out.println("Your ID is: " + i);
+            out.close();
+        }
+        else if (num > i){
+            int diff = num - i;
+            i = i + diff;
+
+            if (num == i);
+            PrintWriter out = new PrintWriter(fileName);
+            i++;
+            out.println(i);
+            System.out.println("Your ID is: " + i);
+            out.close();
+        }
+        else if (num == i){
+            PrintWriter out = new PrintWriter(fileName);
+            i++;
+            out.println(i);
+            System.out.println("Your ID is: " + i);
+            out.close();
+        }
+    }
+    public static void generateCustomerDataFile(String username) throws FileNotFoundException{
+        File file = new File("../../customerDataFile.csv");
+
+        String fileName = "customerDataFile.csv";
+        PrintWriter out = new PrintWriter(fileName);
+
         
+        //  customor info & ID
+        
+        out.println(enterCustomerInfo(););
+        out.println(unqiuePassword(username););
+        out.close();
     }
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
