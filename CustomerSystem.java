@@ -1,3 +1,7 @@
+package BuisnessCodeAssignment;
+
+import java.io.FileNotFoundException;
+
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 
 
@@ -69,14 +73,70 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validateCreditCard(){
+    public static void validateCreditCard(String creditCardNumber){
+
+        // Setting up the int I will use later
+        int sumOdd = 0;
+        int sumEvenDouble = 0;
+
+        boolean creditCardOrNot;
+
+
+        // Check for the lengh of credit card
+        int len = creditCardNumber.length();
+
+        // If the credit card number is greater than or equal to 9, it might be real
+        // goes onto the next varification steps
+        if (len >= 9){
+            // Convert the string creditCardNumber to an actual number stored in int
+            int mathCreditCardNumber = Integer.parseInt(creditCardNumber);
+
+            // Reverse the credit card number
+            for (int i = len; i >0; i--){
+
+                // If the reversed credit card num is an odd number
+                // The code will take all of the odd numbers and add them together
+                if (i%2 != 0){
+                    int oddDigit = i;
+                    sumOdd = sumOdd + oddDigit;
+                }
+
+                // If the reversed credit card num is an even number 
+                // The code will double all of the even numbers
+                else{
+                    int evenDigit = 2*i;
+
+                    // If the code is a double digit or above, the two digits are added together into a one digit number
+                    while(evenDigit > 0){
+                        sumEvenDouble = sumEvenDouble + evenDigit%10;
+                        evenDigit = evenDigit / 10;
+                    }
+                }
+            }
+            // The final check for credit card, if the sum of all odd num and sum of all the doubled even num is divisble by 10, it is real, if not, then it is fake
+            int sumOddEven = sumOdd + sumEvenDouble;
+
+            if (sumOddEven % 10 == 0){
+                creditCardOrNot = true;
+                System.out.println("The credit card is a validated real credit card");
+            }
+            else{
+                creditCardOrNot = false;
+                System.out.println("This credit card is not a real one");
+            }
+        }
+        // If the credit card number is less than 9, then this card is fake to the program
+        else{
+            System.out.println("The card is fake");
+        }
     }
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void generateCustomerDataFile(){
+    public static void generateCustomerDataFile(String username) throws FileNotFoundException{ 
+        
     }
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
