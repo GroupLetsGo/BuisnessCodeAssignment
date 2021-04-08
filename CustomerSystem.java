@@ -69,7 +69,20 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validatePostalCode(){
+    public static boolean validatePostalCode(String postalCode,String[] validPostalCodes){
+
+        // Check for the length of postal code
+        int lenCode = postalCode.length();
+        if (lenCode < 3){
+            return false;
+        }
+        // Check if the simplified code is in the file
+        for (String code:validPostalCodes) {
+            if(code.equals(postalCode)){
+                return true;
+            }
+        }
+        return false;
     }
     /*
     * This method may be edited to achieve the task however you like.
