@@ -2,7 +2,9 @@ package BuisnessCodeAssignment;
 
 
 import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
 
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
@@ -62,21 +64,88 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void enterCustomerInfo() {
+    public static String[] enterCustomerInfo(Scanner reader,String[] validPostalCodes) {
+        System.out.println("Please enter your first name.");
+        String firstName = reader.nextLine();
+        System.out.println("Please enter your last name.");
+        String lastName = reader.nextLine();
+        System.out.println("Please enter the city you live in.");
+        String city = reader.nextLine();
+
+        // Prompt the user to input the postal code
+        String postalCode;
+        do{
+            System.out.println("Please enter your postal code.");
+            postalCode = reader.nextLine();
+        } while(!validatePostalCode(postalCode,validPostalCodes));  // check if postal code is valid
+
+        String creditCardNumber;
+        do{
+            System.out.println("Please enter your credit card number.");
+            creditCardNumber = reader.nextLine();
+        }while (!validateCreditCard(creditCardNumber));    // check if credit card number is valid
+        
+        int lenFirstName = firstName.length();
+
+        System.out.println("First name: " + firstName + "\nLast name: " + lastName + "\nCity: " + city + "\nPostal Code: " + postalCode + "\nCredit card number: " + creditCardNumber);
+        return new String[] {firstName,lastName,city,postalCode,creditCardNumber};
     }
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validatePostalCode(){
+    public static String[] readPostalCodeFromFile(String filename){
+        String[] postalCodes = new String[0];
+        int nLines = 0;
+        try{
+            FileReader fr = new FileReader(filename);
+            BufferedReader br=new BufferedReader(fr);
+            String line;
+            while((line = br.readLine())!= null){
+                nLines ++;
+            }
+            br.close();
+            fr.close();
+
+            nLines --;
+            postalCodes = new String[nLines];
+            fr = new FileReader(filename);
+            br = new BufferedReader(fr);
+            br.readLine();
+            int i = 0;
+            while((line = br.readLine())!= null){
+                postalCodes[i] = line.substring(0,3);
+                i++;
+            }
+            br.close();
+            fr.close();
+        }catch (Exception e){
+            System.out.print(e);
+        }
+        return postalCodes;
     }
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validateCreditCard(String creditCardNumber){
+    public static boolean validatePostalCode(String postalCode,String[] validPostalCodes){
+
+        // Check for the length of postal code
+        int lenCode = postalCode.length();
+        if (lenCode < 3){
+            return false;
+        }
+        // Check if the simplified code is in the file
+        for (String code:validPostalCodes) {
+            if(code.equals(postalCode)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public static boolean validateCreditCard(String creditCardNumber){
 
         // Setting up the int I will use later
         int sumOdd = 0;
@@ -95,7 +164,7 @@ class CustomerSystem{
             int mathCreditCardNumber = Integer.parseInt(creditCardNumber);
 
             // Reverse the credit card number
-            for (int i = len; i >0; i--){
+            for (int i = len; i > 0; i--){
 
                 // If the reversed credit card num is an odd number
                 // The code will take all of the odd numbers and add them together
@@ -122,25 +191,27 @@ class CustomerSystem{
             if (sumOddEven % 10 == 0){
                 creditCardOrNot = true;
                 System.out.println("The credit card is a validated real credit card");
+                return true;
             }
             else{
                 creditCardOrNot = false;
                 System.out.println("This credit card is not a real one");
+                return false;
             }
         }
         // If the credit card number is less than 9, then this card is fake to the program
         else{
             System.out.println("The card is fake");
+            return false;
         }
     }
+    
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void unqiuePassword(String username) throws FileNotFoundException{ 
-        
-        
+    public static void uniqueID(String username) throws FileNotFoundException{ 
 
         String fileName = "ID.txt"; // The name of the text file that we will save to ensure an unique ID
         // Creat a file instance to reference the text file in java
