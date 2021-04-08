@@ -16,7 +16,7 @@ import java.util.Scanner;
 // More packages may be imported in the space below
 
 class CustomerSystem{
-    public static void main(String[] args){
+    public static void main(String[] args, String[] validPostalCodes, int i) throws FileNotFoundException{
         // Please do not edit any of these variables
         Scanner reader = new Scanner(System.in);
         String userInput, enterCustomerOption, generateCustomerOption, exitCondition;
@@ -34,11 +34,11 @@ class CustomerSystem{
             if (userInput.equals(enterCustomerOption)){
                 // Only the line below may be editted based on the parameter list and how you design the method return
 		        // Any necessary variables may be added to this if section, but nowhere else in the code
-                enterCustomerInfo();
+                enterCustomerInfo(reader, args, 0);
             }
             else if (userInput.equals(generateCustomerOption)) {
                 // Only the line below may be editted based on the parameter list and how you design the method return
-                generateCustomerDataFile();
+                generateCustomerDataFile(enterCustomerInfo(reader, validPostalCodes, i));
             }
             else{
                 System.out.println("Please type in a valid option (A number from 1-9)");
@@ -64,7 +64,7 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static String[] enterCustomerInfo(Scanner reader,String[] validPostalCodes) {
+    public static String[] enterCustomerInfo(Scanner reader,String[] validPostalCodes, int j) throws FileNotFoundException {
         System.out.println("Please enter your first name.");
         String firstName = reader.nextLine();
         System.out.println("Please enter your last name.");
@@ -84,18 +84,18 @@ class CustomerSystem{
             System.out.println("Please enter your credit card number.");
             creditCardNumber = reader.nextLine();
         }while (!validateCreditCard(creditCardNumber));    // check if credit card number is valid
-        
-        int lenFirstName = firstName.length();
+        // Look for length, substring and then add comma where ever there isnt a substring
+        int ID = uniqueID(j);
 
         System.out.println("First name: " + firstName + "\nLast name: " + lastName + "\nCity: " + city + "\nPostal Code: " + postalCode + "\nCredit card number: " + creditCardNumber);
-        return new String[] {firstName,lastName,city,postalCode,creditCardNumber};
+        return new String[] {firstName + "," + lastName + "," + uniqueID(j) + "," + city + "," + postalCode + "," + creditCardNumber};
     }
     /*
     * This method may be edited to achieve the task however you like.
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static String[] readPostalCodeFromFile(String filename){
+    public static String[] readPostalCodeFromFile(String filename)throws FileNotFoundException{
         String[] postalCodes = new String[0];
         int nLines = 0;
         try{
@@ -211,7 +211,7 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void uniqueID(String username) throws FileNotFoundException{ 
+    public static int uniqueID(int i) throws FileNotFoundException{ 
 
         String fileName = "ID.txt"; // The name of the text file that we will save to ensure an unique ID
         // Creat a file instance to reference the text file in java
@@ -226,8 +226,6 @@ class CustomerSystem{
         // Closing the scanner
         reader.close();
 
-        
-
         // To have the text file start off with a int value 0 and keep going from there 
         if (fileName.length() == 0){                                    // Cannot get the file to start with a zero
             PrintWriter out = new PrintWriter(fileName);                // Might just delete
@@ -236,53 +234,52 @@ class CustomerSystem{
             // Closing the scanner
             out.close();
         }
-
         // Setting up the first ID
-        int i = 1;
+        int j = 1;
 
         // If the value of the int variable in the text file is zero, the ID will be 1
         if(num == 0){
             // Created a PrintWriter instance to export to the text file in java
             PrintWriter out = new PrintWriter(fileName);
-            out.println(i);
-            System.out.println("Your ID is: " + i);
+            out.println(j);
             // Closing the scanner
             out.close();
         }
         // If the value of the int on the text file is greater than 1, then the value of i will be subtracted from the num on the text file at the moment
         // and then add that difference to i to make sure i is the same value as the num on the text file
-        else if (num > i){
-            int diff = num - i;
+        else if (num > j){
+            int diff = num - j;
             i = i + diff;
 
             // if the num on the textfile is the same as the i; the num that is getting printed, then i will add 1 to itself to ensure it is greater than all of the nums printed
             // to the textfile so far
-            if (num == i);
+            if (num == j);
             // Created a PrintWriter instance to export to the text file in java
             PrintWriter out = new PrintWriter(fileName);
             i++;
-            out.println(i);
-            System.out.println("Your ID is: " + i);
+            out.println(j);
             // Closing the scanner
             out.close();
         }
-        else if (num == i){
+        else if (num == j){
             // Created a PrintWriter instance to export to the text file in java
             PrintWriter out = new PrintWriter(fileName);
             i++;
-            out.println(i);
-            System.out.println("Your ID is: " + i);
+            out.println(j);
+            
             // Closing the scanner
             out.close();
         }
+        return j;
     }
-    public static void generateCustomerDataFile(String username) throws FileNotFoundException{
-        File file = new File("../../customerDataFile.csv");
+    
+    public static void generateCustomerDataFile(String[] strings) throws FileNotFoundException{
         PrintWriter out = new PrintWriter("customerDataFile.csv");
 
-        out.println(enterCustomerInfo(););
+        out.println(enterCustomerInfo(null, strings, 0));
         out.close();
     }
+    
     /*******************************************************************
     *       ADDITIONAL METHODS MAY BE ADDED BELOW IF NECESSARY         *
     *******************************************************************/
