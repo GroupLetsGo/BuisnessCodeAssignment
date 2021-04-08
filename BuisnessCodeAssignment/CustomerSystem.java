@@ -139,63 +139,77 @@ class CustomerSystem{
     * This method may also be broken down further depending on your algorithm
     */
     public static void unqiuePassword(String username) throws FileNotFoundException{ 
-        File file = new File("../../ID.txt");
+        
+        
 
-        String fileName = "ID.txt"; // 
-
+        String fileName = "ID.txt"; // The name of the text file that we will save to ensure an unique ID
+        // Creat a file instance to reference the text file in java
         File textFile = new File(fileName);
+        // Created a scanner instance to read the text file in java
         Scanner reader = new Scanner(textFile);
 
+        // Reads the line on the file and store the int on the line
         int nextInt = reader.nextInt();
         int num = nextInt;
 
+        // Closing the scanner
         reader.close();
 
+        
+
+        // To have the text file start off with a int value 0 and keep going from there 
         if (fileName.length() == 0){                                    // Cannot get the file to start with a zero
-            PrintWriter out = new PrintWriter(fileName);
+            PrintWriter out = new PrintWriter(fileName);                // Might just delete
             int zero = 0;
             out.println(zero);
+            // Closing the scanner
             out.close();
         }
 
+        // Setting up the first ID
         int i = 1;
 
+        // If the value of the int variable in the text file is zero, the ID will be 1
         if(num == 0){
+            // Created a PrintWriter instance to export to the text file in java
             PrintWriter out = new PrintWriter(fileName);
             out.println(i);
             System.out.println("Your ID is: " + i);
+            // Closing the scanner
             out.close();
         }
+        // If the value of the int on the text file is greater than 1, then the value of i will be subtracted from the num on the text file at the moment
+        // and then add that difference to i to make sure i is the same value as the num on the text file
         else if (num > i){
             int diff = num - i;
             i = i + diff;
 
+            // if the num on the textfile is the same as the i; the num that is getting printed, then i will add 1 to itself to ensure it is greater than all of the nums printed
+            // to the textfile so far
             if (num == i);
+            // Created a PrintWriter instance to export to the text file in java
             PrintWriter out = new PrintWriter(fileName);
             i++;
             out.println(i);
             System.out.println("Your ID is: " + i);
+            // Closing the scanner
             out.close();
         }
         else if (num == i){
+            // Created a PrintWriter instance to export to the text file in java
             PrintWriter out = new PrintWriter(fileName);
             i++;
             out.println(i);
             System.out.println("Your ID is: " + i);
+            // Closing the scanner
             out.close();
         }
     }
     public static void generateCustomerDataFile(String username) throws FileNotFoundException{
         File file = new File("../../customerDataFile.csv");
+        PrintWriter out = new PrintWriter("customerDataFile.csv");
 
-        String fileName = "customerDataFile.csv";
-        PrintWriter out = new PrintWriter(fileName);
-
-        
-        //  customor info & ID
-        
         out.println(enterCustomerInfo(););
-        out.println(unqiuePassword(username););
         out.close();
     }
     /*******************************************************************
