@@ -60,7 +60,29 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void enterCustomerInfo() {
+    public static String[] enterCustomerInfo(Scanner reader,String[] validPostalCodes) {
+        // Prompt the user to input the information
+        System.out.println("Please enter your first name.");
+        String firstname = reader.nextLine();
+        System.out.println("Please enter your last name.");
+        String lastname = reader.nextLine();
+        System.out.println("Please enter the city you live in.");
+        String city = reader.nextLine();
+
+        // Prompt the user to input the postal code
+        String postalCode;
+        do{
+            System.out.println("Please enter your postal code.");
+            postalCode = reader.nextLine();
+        } while(!validatePostalCode(postalCode,validPostalCodes));  // check if postal code is valid
+
+        String creditCardNumber;
+        do{
+            System.out.println("Please enter your credit card number.");
+            creditCardNumber = reader.nextLine();
+        }while (!validateCreditCard(creditCardNumber));    // check if credit card number is valid
+        System.out.println("First name: " + firstname + "\nLast name: " + lastname + "\nCity: " + city + "\nPostal Code: " + postalCode + "\nCredit card number: " + creditCardNumber);
+        return new String[] {firstname,lastname,city,postalCode,creditCardNumber};
     }
 
     public static String[] readPostalCodeFromFile(String filename){
@@ -114,13 +136,13 @@ class CustomerSystem{
     * The method may not nesessarily be a void return type
     * This method may also be broken down further depending on your algorithm
     */
-    public static void validateCreditCard(String creditCardNumber){
+    public static boolean validateCreditCard(String creditCardNumber){
 
         // Setting up the int I will use later
         int sumOdd = 0;
         int sumEvenDouble = 0;
 
-        boolean creditCardOrNot;
+        boolean creditCardOrNot = false;
 
 
         // Check for the lengh of credit card
@@ -170,6 +192,7 @@ class CustomerSystem{
         else{
             System.out.println("The card is fake");
         }
+        return creditCardOrNot;
     }
     /*
     * This method may be edited to achieve the task however you like.
