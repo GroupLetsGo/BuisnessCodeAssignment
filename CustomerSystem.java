@@ -145,6 +145,19 @@ class CustomerSystem{
         }
         return false;
     }
+    /*
+    * Description - Adds three to a number that is passed through it
+    *
+    * @param x -integer value from1 to 100
+    * @return - A number three greater than the parameter
+
+    // Adds three to a given number
+    // Method names should be easy to understand
+    // Methods that return things are know as 
+    //    * Functional Methods : return a value back to main
+    //        - Could be public static int/String/boolean/double, can output alot of things as well as inputing alot of things as parameter
+    
+    */
     public static boolean validateCreditCard(String creditCardNumber){
 
         // Setting up the int I will use later
@@ -226,14 +239,6 @@ class CustomerSystem{
         // Closing the scanner
         reader.close();
 
-        // To have the text file start off with a int value 0 and keep going from there 
-        if (fileName.length() == 0){                                    // Cannot get the file to start with a zero
-            PrintWriter out = new PrintWriter(fileName);                // Might just delete
-            int zero = 0;
-            out.println(zero);
-            // Closing the scanner
-            out.close();
-        }
         // Setting up the first ID
         int j = 1;
 
