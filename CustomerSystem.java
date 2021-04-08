@@ -1,9 +1,7 @@
 package BuisnessCodeAssignment;
 
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 
 // Throughout this project, the use of data structures are not permitted such as methods like .split and .toCharArray
 
@@ -23,7 +21,7 @@ class CustomerSystem{
         exitCondition = "9";
 
         // More variables for the main may be declared in the space below
-
+        String[] validPostalCodes = readPostalCodeFromFile("postal_codes.csv");
 
         do{
             printMenu();                                    // Printing out the main menu
@@ -64,11 +62,38 @@ class CustomerSystem{
     */
     public static void enterCustomerInfo() {
     }
-    /*
-    * This method may be edited to achieve the task however you like.
-    * The method may not nesessarily be a void return type
-    * This method may also be broken down further depending on your algorithm
-    */
+
+    public static String[] readPostalCodeFromFile(String filename){
+        String[] postalCodes = new String[0];
+        int nLines = 0;
+        try{
+            FileReader fr = new FileReader(filename);
+            BufferedReader br=new BufferedReader(fr);
+            String line;
+            while((line = br.readLine())!= null){
+                nLines ++;
+            }
+            br.close();
+            fr.close();
+
+            nLines --;
+            postalCodes = new String[nLines];
+            fr = new FileReader(filename);
+            br = new BufferedReader(fr);
+            br.readLine();
+            int i = 0;
+            while((line = br.readLine())!= null){
+                postalCodes[i] = line.substring(0,3);
+                i++;
+            }
+            br.close();
+            fr.close();
+        }catch (Exception e){
+            System.out.print(e);
+        }
+        return postalCodes;
+    }
+
     public static boolean validatePostalCode(String postalCode,String[] validPostalCodes){
 
         // Check for the length of postal code
