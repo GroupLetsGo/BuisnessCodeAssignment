@@ -1,2 +1,9 @@
 {
+    "java.project.sourcePaths": [
+        "Hw/Hw9",
+        "Hw/Hw8",
+        "ClassNotes",
+        "Assignments/Formative",
+        "Assignments/Summative"
+    ]
 }

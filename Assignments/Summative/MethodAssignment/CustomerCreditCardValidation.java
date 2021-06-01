@@ -10,8 +10,7 @@ class CustomerCreditCardValidation {
         int evenDigit;
         int sumOdd = 0;
         int sumEvenDouble = 0;
-        int sumOfBothDigit = 0;
-
+        int sumEven = 0;
         
         boolean creditCardOrNot;
 
@@ -38,37 +37,23 @@ class CustomerCreditCardValidation {
 
                 // If the reversed credit card num is an even number 
                 // The code will double all of the even numbers
-                else if (i%2 == 0){
-                    evenDigit = i;
+                else{
+                    evenDigit = 2*i;
 
-                    int doubleEvenDigit = 2*evenDigit;
-
-                    while(doubleEvenDigit > 10){
-                        sumOfBothDigit = sumOfBothDigit + doubleEvenDigit%10;   // divide by 10 twice and add the result
-                        doubleEvenDigit = doubleEvenDigit / 10;
+                    while(evenDigit > 0){
+                        sumEvenDouble = sumEvenDouble + evenDigit%10;
+                        evenDigit = evenDigit / 10;
                     }
-                    if (doubleEvenDigit < 10){
-                        sumEvenDouble = sumEvenDouble + doubleEvenDigit;
-                    }
-                    
-                }
-                int sumOddEven = sumOdd + sumEvenDouble;
-                
-                if (sumOddEven % 10 == 0){
-                    creditCardOrNot = true;
-                }
-                else if (sumOddEven % 10 != 0){
-                    creditCardOrNot = false;
                 }
             }
-            System.out.println(sumEvenDouble);
-            
-            
+            int sumOddEven = sumOdd + sumEvenDouble;
 
-            if (creditCardOrNot = true){
+            if (sumOddEven % 10 == 0){
+                creditCardOrNot = true;
                 System.out.println("The credit card is a validated real credit card");
             }
-            else if (creditCardOrNot = false){
+            else{
+                creditCardOrNot = false;
                 System.out.println("This credit card is not a real one");
             }
         }
@@ -78,7 +63,6 @@ class CustomerCreditCardValidation {
         }
     }
 }
-
 
 
         
